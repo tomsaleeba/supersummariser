@@ -1,0 +1,5 @@
+tests/
+docker/
+.vscode/
+.pytest_cache/
+.travis.yml
