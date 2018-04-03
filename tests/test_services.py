@@ -121,7 +121,6 @@ def test_calculate_cost02():
     assert result == 0.15
 
 
-
 def test_calculate_cost03():
     """ can we handle a Decimal as a param """
     usage = 12
