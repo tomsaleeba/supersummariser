@@ -43,6 +43,7 @@ def _log_config(config):
     log_for('ERSA_AUTH_TOKEN')
     log_for('AUTH_HEADER_KEY')
     log_for('SSL_VERIFY')
+    log_for('REMOTE_SERVER_CONNECT_TIMEOUT_SECS')
 
 
 def register_extensions(app):

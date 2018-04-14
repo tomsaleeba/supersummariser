@@ -18,6 +18,7 @@ class Config(metaclass=MetaFlaskEnv):
     ERSA_AUTH_TOKEN = 'not-supplied' # used for pulling data, not auth for calls to this server
     AUTH_HEADER_KEY = 'x-ersa-auth-token'
     SSL_VERIFY = True
+    REMOTE_SERVER_CONNECT_TIMEOUT_SECS = 10
 
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))

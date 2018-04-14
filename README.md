@@ -89,12 +89,11 @@ This is a great way to develop the app as code changes will be hot reloaded.
 ```bash
 git clone <this repo>
 cd supersummariser
-# in a separate terminal, run the DB
-./docker/pg_db/run-postgres.sh
-# back to the first terminal
+export SQLALCHEMY_DATABASE_URI=sqlite:///ss.db # or run postgres with ./docker/pg_db/run-postgres.sh
 export FLASK_DEBUG=1
 export FLASK_APP=autoapp.py
-# create and activate virtualenv, if you want
+# create and activate virtualenv, if you want, then
+export ERSA_AUTH_TOKEN=aabbb11a-16ea-3dc0-9d2d-5368f80707e6 # get this value from sessionStorage['secret'] in the reporting portal
 pip install -r requirements.txt
 flask db upgrade
 flask run
