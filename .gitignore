@@ -52,6 +52,6 @@ env/
 /supersummariser/static/build/
 /supersummariser/webpack/manifest.json
 
-dev.db
+*.db
 .vscode
 .pytest_cache/
