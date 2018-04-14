@@ -7,6 +7,7 @@ services:
     environment:
       SQLALCHEMY_DATABASE_URI: postgresql://postgres:somepass@pg/supersummariser
       ERSA_AUTH_TOKEN: replace-with-your-token # replace me!!!
+      SSL_VERIFY: comodo-bundle.crt
   pg:
     image: 'postgres:10.2'
     environment:

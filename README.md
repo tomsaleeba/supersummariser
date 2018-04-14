@@ -94,6 +94,7 @@ export FLASK_DEBUG=1
 export FLASK_APP=autoapp.py
 # create and activate virtualenv, if you want, then
 export ERSA_AUTH_TOKEN=aabbb11a-16ea-3dc0-9d2d-5368f80707e6 # get this value from sessionStorage['secret'] in the reporting portal
+export SSL_VERIFY=comodo-bundle.crt # most OSs don't seem to have this root built-in
 pip install -r requirements.txt
 flask db upgrade
 flask run

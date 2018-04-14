@@ -277,8 +277,12 @@ class ProcessingFailedError(Exception):
 
 def _get_json(config, url, callback):
     headers = {config.get('AUTH_HEADER_KEY') : config.get('ERSA_AUTH_TOKEN')}
-    resp = requests.get(url, headers=headers, verify=config.get('SSL_VERIFY'),
-            timeout=config.get('REMOTE_SERVER_CONNECT_TIMEOUT_SECS'))
+    try:
+        resp = requests.get(url, headers=headers, verify=config.get('SSL_VERIFY'),
+                timeout=config.get('REMOTE_SERVER_CONNECT_TIMEOUT_SECS'))
+    except requests.exceptions.ReadTimeout:
+        logger.error('Failed while accessing url="%s"' % url)
+        raise
     expected_status_code = 200
     actual_status_code = resp.status_code
     if actual_status_code == 404:
