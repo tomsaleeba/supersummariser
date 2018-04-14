@@ -89,7 +89,7 @@ This is a great way to develop the app as code changes will be hot reloaded.
 ```bash
 git clone <this repo>
 cd supersummariser
-export SQLALCHEMY_DATABASE_URI=sqlite:///ss.db # or run postgres with ./docker/pg_db/run-postgres.sh
+export SQLALCHEMY_DATABASE_URI=sqlite:///$(pwd)/ss.db # or run postgres with ./docker/pg_db/run-postgres.sh
 export FLASK_DEBUG=1
 export FLASK_APP=autoapp.py
 # create and activate virtualenv, if you want, then
