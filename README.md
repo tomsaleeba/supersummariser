@@ -73,6 +73,16 @@ The `GET /process` endpoint is the trigger for performing a harvest from the CRM
  - `months_back=int` (default=2) number of months to harvest data for. 1 means the current month, regardless of what day in the month it is. 2 means the current month and the previous, and so on. It handles months with different lengths correctly. This function is idempotent so you can re-run it whenever you want. The idempotent behaviour is achieved in two ways:
    1. for contract/account data, we delete an existing record before writing a new one
    1. for usage data, we delete the entire month for the service before writing all the fresh data
+ Calculating updates to data is a big task and not one that this project currently tackles. Deleting records before we write new data achieves the desired result of mirroring the source systems that we harvest from.
+
+# Suggested `/process` workflow
+The `/process` endpoint is configurable for the number of months of data it updates using a query string parameter (see above for documentation). The idea is that the business team will decide how many months are required to make sure all billing information is correct. 3 is probably a good number because that means you process:
+ 1. the current, unfinished month
+ 1. the previous month, which has had a bill sent to the users
+ 1. the month before than which has also been billed for an had a month for any discrepancies to be worked out
+An automated job, like `cron`, will call the `/process` endpoint as often as is needed to get new data into the reporting dashboard. Perhaps once a day? Once set up, this should run completely automated.
+
+From time to time, an issue with old data might be fixed and needs to be processed. For these occasions, you can run the `/process` endpoint with a larger value to go back more months and that will harvest your fixes. **Be warned** under the current system, this will also process all the intervening months too.
 
 # Limitations
  1. usage data that can't be joined to the contract/account data **will not** be returned in responses from this API. If you want this information included, you'll need to make a code change for `LEFT JOIN` type behaviour.

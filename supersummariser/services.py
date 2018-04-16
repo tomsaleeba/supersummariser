@@ -225,6 +225,7 @@ def get_hpcsummary_chart(org_filter, month_window, config):
         item['cost'] = calculate_cost(item['cpu_hours'], item['unit_price'])
         item['unit_price'] = item['unit_price']
         item['cpu_hours'] = item['cpu_hours']
+        item['service'] = 'HPC Compute'
         result.append(_clean_types(item))
     return result
 
@@ -466,7 +467,8 @@ def get_allocationsummary_chart(org_filter, month_window, config):
             'blocks': summed_totals[x]['blocks'],
             'cost': summed_totals[x]['cost'],
             'month': summed_totals[x]['month'],
-            'year': summed_totals[x]['year']
+            'year': summed_totals[x]['year'],
+            'service': 'National Storage'
         })
         for x in summed_totals]
     return result
@@ -552,6 +554,7 @@ def get_hpcstorage_chart(org_filter, month_window, config):
             blocks = int(math.ceil(usage_gb / config.get('STORAGE_BLOCK_SIZE_GB')))
         item['blocks'] = blocks
         item['cost'] = blocks * config.get('HPC_HOME_BLOCK_PRICE')
+        item['service'] = 'HPC Storage'
         result.append(_clean_types(item))
     return result
 
@@ -626,6 +629,7 @@ def get_nectar_chart(org_filter, month_window, config):
         core_count = row[4]
         item['core'] = core_count
         item['cost'] = config.get('NECTAR_NOVA_VCPU_PRICE') * core_count
+        item['service'] = 'NECTAR'
         result.append(_clean_types(item))
     return result
 
@@ -703,6 +707,7 @@ def get_tango_chart(org_filter, month_window, config):
         core_count = row[5]
         item['core'] = core_count
         item['cost'] = item['unit_price'] * core_count
+        item['service'] = 'Tango'
         result.append(_clean_types(item))
     return result
 
